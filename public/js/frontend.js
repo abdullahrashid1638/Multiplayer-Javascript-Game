@@ -37,6 +37,12 @@ socket.on('updateProjectiles', (backEndProjectiles) => {
       frontEndProjectiles[id].y += backEndProjectiles[id].velocity.y
     }
   }
+
+  for (const frontEndProjectileId in frontEndProjectiles) {
+    if (!backEndProjectiles[frontEndProjectileId]) {
+      delete frontEndProjectiles[frontEndProjectileId]
+    }
+  }
 })
 
 socket.on('updatePlayers', (backEndPlayers) => {
@@ -85,7 +91,7 @@ socket.on('updatePlayers', (backEndPlayers) => {
     if (!backEndPlayers[id]) {
       delete frontEndPlayers[id]
     }
-  }
+  }  
 })
 
 let animationId

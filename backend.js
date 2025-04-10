@@ -92,11 +92,14 @@ setInterval(() => {
     const PROJECTILE_RADIUS = 5
     if (
       backEndProjectiles[id].x - PROJECTILE_RADIUS >= 
-      backEndPlayers[backEndProjectiles[id].playerId]?.canvas?.w
+      backEndPlayers[backEndProjectiles[id].playerId]?.canvas?.w || 
+      backEndProjectiles[id].x + PROJECTILE_RADIUS <= 0 ||
+      backEndProjectiles[id].y - PROJECTILE_RADIUS >= 
+      backEndPlayers[backEndProjectiles[id].playerId]?.canvas?.h || 
+      backEndProjectiles[id].y + PROJECTILE_RADIUS <= 0
     ) {
       delete backEndProjectiles[id]
     }
-    console.log(backEndProjectiles)
   }
 
   io.emit('updateProjectiles', backEndProjectiles)
