@@ -17,7 +17,7 @@ const frontEndPlayers = {}
 const frontEndProjectiles = {}
 
 socket.on('connect', () => {
-  socket.emit('initCanvas', { w: canvas.width, h: canvas.height })
+  socket.emit('initCanvas', { w: canvas.width, h: canvas.height, devicePixelRatio })
 })
 
 socket.on('updateProjectiles', (backEndProjectiles) => {
@@ -28,7 +28,7 @@ socket.on('updateProjectiles', (backEndProjectiles) => {
       frontEndProjectiles[id] = new Projectile({ 
         x: backEndProjectile.x, 
         y: backEndProjectile.y, 
-        radius: 5, 
+        radius: 3, 
         color: frontEndPlayers[backEndProjectile.playerId]?.color, 
         velocity: backEndProjectile.velocity
       })
