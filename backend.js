@@ -24,22 +24,29 @@ const RADIUS = 10
 
 io.on('connection', (socket) => {
   console.log('a user connected')
-  backEndPlayers[socket.id] = {
-    x: 500 * Math.random(),
-    y: 500 * Math.random(),
-    color: `hsl(${Math.round(Math.random() * 360)}, 100%, 50%)`,
-    sequenceNumber: 0,
-    score: 0
-  }
-
+  
   io.emit('updatePlayers', backEndPlayers)
 
-  socket.on('initCanvas', ({ w, h, devicePixelRatio }) => {
+  socket.on('initGame', ({ username, w, h, devicePixelRatio }) => {
+    console.log(`New Joined Player is "${username}"`)
+    backEndPlayers[socket.id] = {
+      x: 500 * Math.random(),
+      y: 500 * Math.random(),
+      color: `hsl(${Math.round(Math.random() * 360)}, 100%, 50%)`,
+      sequenceNumber: 0,
+      score: 0,
+      username
+    }
+    // initing our canvas
     backEndPlayers[socket.id].canvas = { w, h }
     backEndPlayers[socket.id].rad = RADIUS
     if (devicePixelRatio > 1) {
       backEndPlayers[socket.id].rad = RADIUS * 2
     }
+  })
+
+  socket.on('initCanvas', ({ w, h, devicePixelRatio }) => {
+    
   })
 
   socket.on('shoot', ({ x, y, angle }) => {

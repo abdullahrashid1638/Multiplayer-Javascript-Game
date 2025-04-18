@@ -15,6 +15,4 @@ addEventListener('click', (event) => {
     y: playerPosition.y,
     angle
   })
-
-  console.log(frontEndProjectiles)
 })
