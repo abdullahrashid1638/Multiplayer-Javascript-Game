@@ -45,10 +45,6 @@ io.on('connection', (socket) => {
     }
   })
 
-  socket.on('initCanvas', ({ w, h, devicePixelRatio }) => {
-    
-  })
-
   socket.on('shoot', ({ x, y, angle }) => {
     projectileId++
 
